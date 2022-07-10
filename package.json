@@ -5,11 +5,20 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "apollo": "vue-cli-service apollo:dev --generate-schema",
+    "apollo:schema:generate": "vue-cli-service apollo:schema:generate",
+    "apollo:schema:publish": "vue-cli-service apollo:schema:publish",
+    "apollo:start": "vue-cli-service apollo:start"
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "graphql-type-json": "^0.2.1",
+    "lowdb": "^1.0.0",
+    "mkdirp": "^0.5.1",
+    "shortid": "^2.2.8",
     "vue": "^3.2.13",
+    "vue-apollo": "^3.0.0-beta.11",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
@@ -20,8 +29,11 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
+    "eslint-plugin-graphql": "^2.1.1",
     "eslint-plugin-vue": "^8.0.3",
-    "vue-cli-plugin-apollo": "~0.22.2"
+    "graphql-tag": "^2.9.0",
+    "vue-cli-plugin-apollo": "~0.22.2",
+    "vue-loader": "^17.0.0"
   },
   "eslintConfig": {
     "root": true,
@@ -35,7 +47,19 @@
     "parserOptions": {
       "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "graphql/template-strings": [
+        "error",
+        {
+          "env": "literal",
+          "projectName": "app",
+          "schemaJsonFilepath": "node_modules/.temp/graphql/schema.json"
+        }
+      ]
+    },
+    "plugins": [
+      "graphql"
+    ]
   },
   "browserslist": [
     "> 1%",
